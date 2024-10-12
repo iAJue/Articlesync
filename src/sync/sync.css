@@ -10,7 +10,6 @@ body {
 .container {
   display: flex;
   flex-direction: row;
-  height: 100vh; /* 让界面占满整个窗口高度 */
 }
 
 /* 左侧文章编辑部分 */

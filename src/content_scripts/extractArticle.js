@@ -7,7 +7,6 @@ export function extractArticle() {
     const article = reader.parse();
 
     if (article) {
-        console.log('文章提取成功:', article);
         return {
             title: article.title,
             content: article.content

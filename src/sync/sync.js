@@ -1,10 +1,8 @@
 import syncManager from '../core/syncManager';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // 动态加载支持的平台
     const platformsContainer = document.getElementById('platforms');
     const supportedPlatforms = await syncManager.getSupportedPlatforms();
-
     if (supportedPlatforms && supportedPlatforms.length > 0) {
         supportedPlatforms.forEach(platform => {
             const platformItem = document.createElement('div');
@@ -26,64 +24,55 @@ document.addEventListener('DOMContentLoaded', async () => {
             platformItem.appendChild(label);
             platformsContainer.appendChild(platformItem);
         });
-    } else {
-        platformsContainer.innerHTML = '<p>没有可用的平台</p>';
     }
 
     // 从存储中加载文章数据
     chrome.storage.local.get(['article'], (result) => {
-        if (result.article) {  // 确保获取的是 article 对象
-            console.log('文章数据:', result.article);
+        if (result.article) { 
             document.getElementById('title').value = result.article.title || "无标题";
             document.getElementById('content').innerHTML = result.article.content || "无内容";
         } else {
-            console.log('没有提取到文章内容');
+            alert('没有提取到文章内容');
         }
     });
-
-
-
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('publishButton').addEventListener('click', async () => {
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').innerHTML;
-
-        // 获取选中的平台
-        const selectedPlatforms = Array.from(document.querySelectorAll('input[name="platform"]:checked')).map(el => el.value);
-
-        const statusUpdates = []; // 用于保存同步状态
-
+        const selectedPlatforms = Array.from(document.querySelectorAll('input[name="platform"]:checked')).map(el => {
+            const platformValue = el.value;
+            const platformLabel = document.querySelector(`label[for="${el.id}"]`).textContent;
+            return {
+                value: platformValue,
+                label: platformLabel
+            };
+        });
+        
+        const statusUpdates = []; 
         for (const platform of selectedPlatforms) {
             try {
-                // 调用 syncManager 进行发布
-                await syncManager.syncPost(platform, { post_title: title, post_content: content });
-                console.log(`成功同步到 ${platform}`);
-
-                // 记录成功状态
+                await syncManager.syncPost(platform.value, { post_title: title, post_content: content });
                 statusUpdates.push({
-                    platform,
+                    platform: platform.label, 
                     status: 'success',
-                    message: `成功同步到 ${platform}`
+                    message: `成功同步到 ${platform.label}`,
+                    title: title
                 });
             } catch (error) {
-                console.error(`同步到 ${platform} 失败:`, error);
-
-                // 记录失败状态
                 statusUpdates.push({
-                    platform,
+                    platform: platform.label,
                     status: 'failed',
-                    message: `同步到 ${platform} 失败`
+                    message: `同步到 ${platform.label} 失败`,
+                    title: title
                 });
             }
         }
-
-        // 将状态保存到 chrome.storage.local
         chrome.storage.local.set({ syncStatus: statusUpdates }, () => {
             console.log('同步状态已保存');
+            // window.close();
         });
-
-        alert('同步完成！');
+        alert('同步结束！');
     });
 });

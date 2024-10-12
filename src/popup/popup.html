@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>插件设置</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部导航 -->
+    <div class="nav-tabs">
+      <div class="tab active" id="status-tab">状态</div>
+      <div class="tab" id="account-tab">账号</div>
+      <div class="tab" id="about-tab">关于</div>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="content">
+      <!-- 状态内容 -->
+      <div id="status-content" class="content-section">
+        <h3>同步状态</h3>
+        <div id="task-status">
+          <!-- 动态生成的任务状态 -->
+        </div>
+      </div>
+
+      <!-- 账号内容 -->
+      <div id="account-content" class="content-section hidden">
+        <div id="account-list">
+          <!-- 动态显示账号 -->
+        </div>
+      </div>
+
+      <!-- 关于内容 -->
+      <div id="about-content" class="content-section hidden">
+        <h3>关于</h3>
+        <p>插件版本：1.0.0</p>
+        <p>版权信息：© 2024 <a href="https://MoeJue.cn" target="_blank">阿珏酱</a></p>
+        <p>GitHub：<a href="https://github.com/iAJue/Articlesync" target="_blank">https://github.com/iAJue/Articlesync</a></p>
+      </div>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div class="bottom-buttons">
+      <button class="btn" id="group-btn">交流群</button>
+      <button class="btn" id="feedback-btn">问题反馈</button>
+      <button class="btn" id="help-btn">如何使用</button>
+      <button class="btn" id="add-account-btn">添加账号</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>同步文章</title>
+  <link rel="stylesheet" href="sync.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 左侧部分：文章编辑区 -->
+    <div class="left-section">
+      <input type="text" id="title" class="input-title" value="获取失败">
+      <div id="content" class="editable" contenteditable="true">获取失败</div>
+    </div>
+
+    <!-- 右侧部分：平台选择 -->
+    <div class="right-section">
+      <h3>选择发布平台</h3>
+      <div id="platforms" class="platforms">
+        <!-- 这里动态生成平台列表 -->
+      </div>
+
+      <button id="publishButton" class="publish-btn">发布文章</button>
+    </div>
+  </div>
+
+  <script src="sync.js"></script>
+</body>
+</html>

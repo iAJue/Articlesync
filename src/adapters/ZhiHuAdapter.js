@@ -12,6 +12,9 @@ export default class ZhiHuAdapter extends BaseAdapter {
         const res = await $.ajax({
             url: 'https://www.zhihu.com/api/v4/me?include=account_status,is_bind_phone,is_force_renamed,email,renamed_fullname',
         });
+        if (res.error) {
+            throw new Error('未登录');
+        }
         return {
             uid: res.uid,
             title: res.name,
@@ -31,8 +34,11 @@ export default class ZhiHuAdapter extends BaseAdapter {
             contentType: 'application/json',
             data: JSON.stringify({
                 content: post.post_content,
+                title: post.post_title,
+                topics: 'MoeJue'
             }),
         });
+        this.publishPost(res.id)
         return {
             status: 'success',
             post_id: res.id,
@@ -48,14 +54,33 @@ export default class ZhiHuAdapter extends BaseAdapter {
                 title: post.post_title,
                 content: post.post_content,
                 isTitleImageFullScreen: false,
-                titleImage: `https://pic1.zhimg.com/${post.post_thumbnail}.png`,
+                table_of_contents: false,
+                delta_time: 10,
+                // titleImage: `https://pic1.zhimg.com/${post.post_thumbnail}.png`,
             }),
         });
+        this.publishPost(post_id)
         return {
             status: 'success',
-            post_id: post_id,
-            draftLink: `https://zhuanlan.zhihu.com/p/${post_id}/edit`,
+            post_id: post_id
         };
+    }
+
+    // 目前是存草稿，现在需要把它设置为发布
+    async publishPost(post_id) {
+        await $.ajax({
+            url: `https://zhuanlan.zhihu.com/api/articles/${post_id}/publish`,
+            type: 'PUT',
+            dataType: 'JSON',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                disclaimer_type: "none",
+                disclaimer_status: "close",
+                table_of_contents_enabled: false,
+                commercial_report_info: { commercial_types: [] },
+                commercial_zhitask_bind_info: null,
+            }),
+        });
     }
 
     async uploadFile(file) {

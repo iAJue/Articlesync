@@ -49,3 +49,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
     }
 });
+
+// 注册监听器，监听指定的 URL 请求
+chrome.declarativeNetRequest.updateDynamicRules({
+    addRules: [
+      {
+        "id": 1, // 每个规则都有唯一的 ID
+        "priority": 1, // 优先级
+        "action": {
+          "type": "modifyHeaders", // 动作类型是修改请求头
+          "requestHeaders": [
+            { "header": "cookie", "operation": "set", "value": "your_cookie_value" }
+          ]
+        },
+        "condition": {
+          "urlFilter": "api.bilibili.com", // 只对这个域名生效
+          "resourceTypes": ["xmlhttprequest"] // 过滤特定请求类型
+        }
+      },
+    ],
+    removeRuleIds: [1]
+
+  });

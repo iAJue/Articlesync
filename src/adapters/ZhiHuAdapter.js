@@ -45,7 +45,7 @@ export default class ZhiHuAdapter extends BaseAdapter {
         };
     }
 
-    async editPost(post_id, post) {
+    async editPost(post, post_id) {
         const res = await $.ajax({
             url: `https://zhuanlan.zhihu.com/api/articles/${post_id}/draft`,
             type: 'PATCH',

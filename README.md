@@ -19,6 +19,8 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 - [ ] 第三方图床系统
 - [ ] 多账号管理
 - [ ] 多系统客户端版本
+- [ ] 一键ai总结
+- [ ] 视频同步
 - [ ] 更多平台的接入
 
 ## 支持渠道
@@ -26,6 +28,8 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 |--------------|-------|-----|-----------------------------------|---------------|-----------|
 | 哔哩哔哩        | 主流自媒体 | 已支持 | https://bilibili.com/         | HTML          | 2024/10/13 |
 | 知乎           | 主流自媒体 | 已支持 | https://www.zhihu.com/            | HTML          | 2024/10/13 |
+| 博客园           | 博客 | 已支持 | https://cnblogs.com/            | HTML          | 2024/10/14 |
+| 新浪头条           | 主流自媒体 | 已支持 | https://weibo.com/            | HTML          | 2024/10/14 |
 
 ## 安装说明
 
@@ -61,13 +65,32 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 	```
 	2. 以配置热更新,每次修改代码后，插件将自动打包，并且 Chrome 会自动重新加载插件。
 
+## 如何添加一个适配器
+1. 在 `src/adapters` 目录下创建一个新的适配器文件，例如 `PlatformAdapter.js`。
+2. 继承 `BaseAdapter` 类，并实现以下方法：
+   -  `getMetaData()`: 获取当前页面的元数据。
+   -  `addPost(post)`: 添加新的文章。
+   -  `editPost(post, post_id)`: 编辑文章。
+   -  `uploadFile(file)`: 上传文件。
+   -  定义`constructor`构造函数，设置适配器的版本、类型和名称或其他初始化数据.
+	   ```
+		constructor() {
+			super();
+			this.version = '1.0';
+			this.type = 'Twitter';
+			this.name = '推特';
+		}
+		```
+3. 在 `src/adapters/adapters.js` 中导入并注册新的适配器。
+	
+
 ## 项目结构
 ```
 ├── src
 │   ├── adapters         # 各平台的适配器
 │   │   ├── ZhiHuAdapter.js
 │   │   ├── BilibiliAdapter.js
-│   ├── content_scripts  # 内容脚本
+│   ├── contents         # 内容脚本
 │   ├── background.js    # 后台脚本
 │   ├── popup            # 插件弹窗界面
 │   │   ├── popup.js
@@ -75,9 +98,13 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 │   ├── options          # 扩展选项页面
 │   │   ├── options.js
 │   │   ├── options.html
-├── dist                 # 打包后的文件
-├── webpack.config.js     # Webpack 配置文件
-├── manifest.json         # Chrome 插件清单文件
+│   ├── dist             # 打包后的文件
+│   ├── manifest.json    # Chrome 插件清单文件
+├── webpack.config.js    # Webpack 配置文件
+├── package.json         # 项目配置文件
+├── README.md            # 项目说明文件
+├── .gitignore           # Git 忽略文件
+
 ```
 
 ## 贡献指南
@@ -117,10 +144,10 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 ![image](./images/Feeding.gif)
 
 #### 啥？没钱？没事，我也支持虚拟币
-钱包地址：0x56949baed7b69b09a1c5539230ba6ffadd0323c3
+钱包地址：`0x56949baed7b69b09a1c5539230ba6ffadd0323c3`
 
 ## 许可证
 
 Copyright (c) 2024-present, iAJue
 
-本项目遵循 [GPL-4.0](https://opensource.org/licenses/GPL-3.0) 许可证。
+本项目遵循 [GPL-3.0](https://opensource.org/licenses/GPL-3.0) 许可证。

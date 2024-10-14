@@ -1,5 +1,5 @@
 import BaseAdapter from '../core/BaseAdapter';
-import { _cacheState } from '../core/submitHandler';
+import { getCsrfToken } from '../core/getCsrfToken';
 
 export default class BilibiliAdapter extends BaseAdapter {
     constructor() {
@@ -48,7 +48,7 @@ export default class BilibiliAdapter extends BaseAdapter {
             "media_id": 0,
             "spoiler": 0,
             "original": 1,
-            "csrf": _cacheState['bilibili']['csrf']
+            "csrf": await getCsrfToken('bilibili.com', 'bili_jct')
         };
         if (post_id){
             post_data["aid"] = post_id;

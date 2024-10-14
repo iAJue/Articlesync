@@ -16,7 +16,7 @@ export default class BaseAdapter {
     }
   
     // 编辑文章的方法
-    async editPost(post_id, post) {
+    async editPost(post, post_id) {
       throw new Error("editPost() must be implemented.");
     }
   

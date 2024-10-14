@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "articleExtracted") {
         chrome.storage.local.set({ article: message.data }, () => {
             chrome.windows.getCurrent((currentWindow) => {
-                const width = Math.round(currentWindow.width * 0.8);
+                const width = Math.round(currentWindow.width * 0.85);
                 const height = Math.round(currentWindow.height * 0.8);
                 const left = Math.round((currentWindow.width - width) / 2 + currentWindow.left);
                 const top = Math.round((currentWindow.height - height) / 2 + currentWindow.top);
@@ -53,21 +53,35 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // 注册监听器，监听指定的 URL 请求
 chrome.declarativeNetRequest.updateDynamicRules({
     addRules: [
-      {
-        "id": 1, // 每个规则都有唯一的 ID
-        "priority": 1, // 优先级
-        "action": {
-          "type": "modifyHeaders", // 动作类型是修改请求头
-          "requestHeaders": [
-            { "header": "cookie", "operation": "set", "value": "your_cookie_value" }
-          ]
+        {
+            "id": 1,
+            "priority": 1,
+            "action": {
+                "type": "modifyHeaders",
+                "requestHeaders": [
+                    { "header": "Origin", "operation": "set", "value": "https://card.weibo.com" },
+                    { "header": "Referer", "operation": "set", "value": "https://card.weibo.com/article/v3/editor" }
+                ]
+            },
+            "condition": {
+                "urlFilter": "https://card.weibo.com/article/v3/*",
+                "resourceTypes": ["xmlhttprequest"]
+            }
         },
-        "condition": {
-          "urlFilter": "api.bilibili.com", // 只对这个域名生效
-          "resourceTypes": ["xmlhttprequest"] // 过滤特定请求类型
+        {
+            "id": 2,
+            "priority": 1,
+            "action": {
+                "type": "modifyHeaders",
+                "requestHeaders": [
+                    { "header": "Origin", "operation": "set", "value": "https://member.bilibili.com" }
+                ]
+            },
+            "condition": {
+                "urlFilter": "https://api.bilibili.com/*",
+                "resourceTypes": ["xmlhttprequest"]
+            }
         }
-      },
     ],
-    removeRuleIds: [1]
-
-  });
+    removeRuleIds: [1, 2]
+});

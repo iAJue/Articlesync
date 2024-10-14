@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    contentScript: './src/content_scripts/contentScript.js',  
+    contentScript: './src/contents/contentScript.js',  
     background: './src/background.js',  
     popup: './src/popup/popup.js',
     options: './src/options/options.js',

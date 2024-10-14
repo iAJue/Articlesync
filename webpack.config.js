@@ -39,6 +39,7 @@ module.exports = {
         { from: 'src/options/options.css', to: 'options/options.css' },  
         { from: 'src/sync/sync.html', to: 'sync/sync.html' },  
         { from: 'src/sync/sync.css', to: 'sync/sync.css' },  
+        { from: 'images', to: 'images' },  
       ],
     }),
     new webpack.ProvidePlugin({

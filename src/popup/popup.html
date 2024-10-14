@@ -14,19 +14,37 @@
         </div>
         <div class="content">
             <div id="status-content" class="content-section">
-                <div id="task-status">
-                </div>
+                <div id="task-status"></div>
             </div>
             <div id="account-content" class="content-section hidden">
-                <div id="account-list">
-                </div>
+                <div id="account-list"></div> 
             </div>
             <div id="about-content" class="content-section hidden">
-                <h3>关于</h3>
+                <img src="../images/Feeding.gif" style="width: 100%;">
                 <p>插件版本：1.0.0</p>
                 <p>版权信息：© 2024 <a href="https://MoeJue.cn" target="_blank">阿珏酱</a></p>
-                <p>GitHub：<a href="https://github.com/iAJue/Articlesync"
-                        target="_blank">https://github.com/iAJue/Articlesync</a></p>
+                <p>GitHub：<a href="https://github.com/iAJue/Articlesync" target="_blank">https://github.com/iAJue/Articlesync</a></p>
+            </div>
+        </div>
+        <div id="add-account-section" class="hidden">
+            <button class="btn" id="back-to-tabs-btn">返回</button>
+            <p>除WordPress、Emlog等开源自建平台外，其它平台只要在当前浏览器登录过即可被识别到账号，无需手动添加</p>
+            <div id="add-account-list" class="account-options">
+                <div class="account-option" data-platform="emlog">
+                    <img src="https://www.emlog.net/docs/img/logo.svg" alt="Emlog" class="platform-icon">
+                    <p class="platform-name">Emlog 博客</p>
+                </div>
+                <div class="account-option" data-platform="wordpress">
+                    <img src="https://s1.wp.com/i/favicon.ico" alt="WordPress" class="platform-icon">
+                    <p class="platform-name">WordPress 博客</p>
+                </div>
+            </div>
+            <div id="account-url-input" class="hidden">
+                <input type="text" id="account-name" placeholder="请输入平台名称">
+                <input type="text" id="account-url" placeholder="你的平台的网址，包含http(s)://">
+                <button class="btn" id="save-account-btn">保存账号</button>
+            </div>
+            <div id="other-account-list">
             </div>
         </div>
         <div class="bottom-buttons">

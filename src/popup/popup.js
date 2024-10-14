@@ -51,6 +51,7 @@ function loadSyncStatus() {
     });
 }
 
+// 加载账号信息
 async function loadAccounts() {
     const accountList = document.getElementById('account-list');
     accountList.innerHTML = '';
@@ -88,3 +89,116 @@ document.getElementById('clear-btn').addEventListener('click', () => {
     chrome.storage.local.clear();
     document.getElementById('task-status').innerHTML = '<p>暂无同步任务!</p>';
 })
+
+document.getElementById('add-account-btn').addEventListener('click', () => {
+    document.querySelector('.nav-tabs').classList.add('hidden'); 
+    document.querySelector('.content').classList.add('hidden'); 
+    document.querySelector('.bottom-buttons').classList.add('hidden'); 
+    document.getElementById('add-account-section').classList.remove('hidden'); 
+    loadSavedAccounts();
+});
+document.getElementById('back-to-tabs-btn').addEventListener('click', () => {
+    document.querySelector('.nav-tabs').classList.remove('hidden'); 
+    document.querySelector('.content').classList.remove('hidden'); 
+    document.querySelector('.bottom-buttons').classList.remove('hidden'); 
+    document.getElementById('add-account-section').classList.add('hidden'); 
+});
+
+document.querySelectorAll('.account-option').forEach(option => {
+    option.addEventListener('click', (event) => {
+        // 先清除所有的选中状态
+        document.querySelectorAll('.account-option').forEach(item => {
+            item.classList.remove('selected');
+        });
+        
+        // 设置当前点击的项为选中状态
+        const selectedOption = event.currentTarget;
+        selectedOption.classList.add('selected');
+
+        // 获取选中的平台
+        const platform = selectedOption.getAttribute('data-platform');
+        
+        // 显示输入网址的区域
+        document.getElementById('add-account-list').classList.add('hidden');
+        document.getElementById('account-url-input').classList.remove('hidden');
+        
+        // 设置保存按钮上的平台信息
+        document.getElementById('save-account-btn').setAttribute('data-platform', platform);
+    });
+});
+
+
+
+
+// 点击保存按钮后保存平台、平台名称和网址
+document.getElementById('save-account-btn').addEventListener('click', () => {
+    const url = document.getElementById('account-url').value;
+    const platformName = document.getElementById('account-name').value;  // 获取输入的名称
+    const platform = document.getElementById('save-account-btn').getAttribute('data-platform');
+
+    if (url && platformName) {
+        chrome.storage.local.get(['accounts'], (result) => {
+            const accounts = result.accounts || [];
+            console.log(accounts);
+            const existingAccount = accounts.find(account => account.url === url);
+            if (existingAccount) {
+                alert('此网址已经存在，无法重复添加。');
+            } else {
+                accounts.push({ platform, platformName, url });
+                chrome.storage.local.set({ accounts }, () => {
+                    console.log('账号已保存:', platform, platformName, url);
+                    document.getElementById('account-url-input').classList.add('hidden');
+                    document.getElementById('account-url').value = '';
+                    document.getElementById('account-name').value = '';
+                    document.getElementById('add-account-list').classList.remove('hidden');
+
+                    loadSavedAccounts();
+                });
+            }   
+        });
+    } else {
+        alert('请输入有效的网址和平台名称。');
+    }
+});
+
+
+
+function deleteAccount(index) {
+    chrome.storage.local.get(['accounts'], (result) => {
+        const accounts = result.accounts || [];
+        accounts.splice(index, 1); 
+        chrome.storage.local.set({ accounts }, () => {
+            loadSavedAccounts(); // 重新加载账号列表
+        });
+    });
+}
+
+function loadSavedAccounts() {
+    chrome.storage.local.get(['accounts'], (result) => {
+        const accountList = document.getElementById('other-account-list');
+        accountList.innerHTML = '';
+
+        const accounts = result.accounts || [];
+
+        if (accounts.length > 0) {
+            accounts.forEach((account, index) => {
+                const accountItem = document.createElement('div');
+                accountItem.classList.add('task-item');
+                
+                const platformName = document.createElement('span');
+                platformName.textContent = `平台: ${account.platformName} - 网址: ${account.url}`;
+                accountItem.appendChild(platformName);
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '删除';
+                deleteButton.classList.add('delete-btn');
+                deleteButton.addEventListener('click', () => {
+                    deleteAccount(index);
+                });
+                
+                accountItem.appendChild(deleteButton);
+                accountList.appendChild(accountItem);
+            });
+        } 
+    });
+}

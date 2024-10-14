@@ -2,37 +2,41 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   width: 425px;
   height: 500px;
   max-height: 700px;
-  background-color: #f7f7f7;
+  background-color: #f0f4f8;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  height: 100%;  /* 让容器占满父元素高度 */
+  height: 100%;
   box-sizing: border-box;
+  position: relative;
+  overflow-y:auto;
+  padding-bottom: 66.9px;
+  background-color: #FFF;
 }
 
 .nav-tabs {
   display: flex;
-  background-color: #f9f9f9;
-  border-bottom: 2px solid #ddd;
+  background-color: #ffffff;
+  border-bottom: 2px solid #d1d1d1;
 }
 
 .tab {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   text-align: center;
   cursor: pointer;
-  font-size: 1.2em;
-  color: #666;
+  font-size: 1.1em;
+  color: #5c5c5c;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tab.active {
-  background-color: #fff;
+  background-color: #ffffff;
   border-bottom: 2px solid #4CAF50;
   color: #333;
 }
@@ -40,12 +44,12 @@ body {
 .content {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;  /* 当内容溢出时滚动 */
-  background-color: #fff;
+  overflow-y: auto;
+  background-color: #ffffff;
 }
 
 .hidden {
-  display: none;
+  display: none!important;
 }
 
 .content-section h3 {
@@ -57,11 +61,15 @@ body {
 .task-item {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 6px;
   margin-bottom: 10px;
-  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.task-item span{
+  font-size: 14px;
 }
 
 .task-status {
@@ -72,38 +80,180 @@ body {
 .success {
   background-color: #4CAF50;
   color: white;
-  height: 100%;
 }
 
 .pending {
   background-color: #ff9800;
   color: white;
-  height: 100%;
 }
 
 .failed {
   background-color: #f44336;
   color: white;
-  height: 100%;
 }
 
 .bottom-buttons {
   display: flex;
   justify-content: space-between;
   padding: 15px;
-  background-color: #f9f9f9;
-  border-top: 2px solid #ddd;
+  background-color: #ffffff;
+  border-top: 2px solid #d1d1d1;
+  position: absolute;
+  bottom: 0;
+  width: 92.9%;
 }
 
 .btn {
   padding: 10px 20px;
-  background-color: white;
-  border: 2px solid #ddd;
+  background-color: #4CAF50;
+  border: none;
   border-radius: 5px;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #f0f0f0;
+  background-color: #45a049;
+}
+
+#add-account-section {
+  padding: 20px;
+  background: #FFF;
+  height: 100%;
+}
+
+#other-account-list {
+  margin-top: 10px;
+}
+
+.account-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.account-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  height: 120px;
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.account-option:hover {
+  border-color: #4CAF50;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.account-option.selected {
+  border-color: #4CAF50;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.platform-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.platform-name {
+  font-size: 1.1em;
+  color: #555;
+}
+
+#back-to-tabs-btn {
+  padding: 4px 20px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#back-to-tabs-btn:hover {
+  background-color: #45a049;
+}
+
+#account-list {
+  border-radius: 5px;
+}
+
+#account-list .task-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#account-list p {
+  color: #555;
+  font-size: 1em;
+  margin: 0;
+}
+
+
+input[type="text"]{
+  width: 67%;
+  padding: 8px 20px;
+  margin: 6px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+
+input[type="text"]:focus{
+  border-color: #007BFF;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  outline: none;
+  background-color: #fff;
+}
+
+
+input[type="text"]::placeholder{
+  color: #aaa;
+  font-style: italic;
+}
+
+
+input[type="text"]:not(:placeholder-shown){
+  border-color: #28a745;
+}
+
+.account-url-input{
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+
+#save-account-btn{
+  position: absolute;
+  right: 30px;
+  margin-top: -38px;
+  height: 78px;
+}
+
+.delete-btn{
+  background: #ffc400;
+  color: #FFF;
+  border: 0px solid;
+  border-radius: 5px;
+  cursor: pointer;
 }

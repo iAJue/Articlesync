@@ -30,6 +30,8 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 | 知乎           | 主流自媒体 | 已支持 | https://www.zhihu.com/            | HTML          | 2024/10/13 |
 | 博客园           | 博客 | 已支持 | https://cnblogs.com/            | HTML          | 2024/10/14 |
 | 新浪头条           | 主流自媒体 | 已支持 | https://weibo.com/            | HTML          | 2024/10/14 |
+| emlog           | 开源CMS | 已支持 | https://www.emlog.net/            | HTML          | 2024/10/14 |
+| WordPress           | 开源CMS | 已支持 | https://cn.wordpress.org/            | HTML          | 2024/10/14 |
 
 ## 安装说明
 

@@ -80,7 +80,7 @@ export default class WeiboAdapter extends BaseAdapter {
 
         var res = await $.ajax({
             url:
-                'https://card.weibo.com/article/v3/aj/editor/draft/save?uid=2016742425' +
+                'https://card.weibo.com/article/v3/aj/editor/draft/save?uid=' +
                 this.uid +
                 '&id=' +
                 post_id,
@@ -93,7 +93,7 @@ export default class WeiboAdapter extends BaseAdapter {
         })
         var res = await $.ajax({
             url:
-                'https://card.weibo.com/article/v3/aj/editor/draft/publish?uid=2016742425' +
+                'https://card.weibo.com/article/v3/aj/editor/draft/publish?uid=' +
                 this.uid +
                 '&id=' +
                 post_id,

@@ -9,12 +9,18 @@ export default class ZhiHuAdapter extends BaseAdapter {
     }
 
     async getMetaData() {
-        const res = await $.ajax({
-            url: 'https://www.zhihu.com/api/v4/me?include=account_status,is_bind_phone,is_force_renamed,email,renamed_fullname',
-        });
-        if (res.error) {
+        let res;
+        try {
+            res = await $.ajax({
+                url: 'https://www.zhihu.com/api/v4/me?include=account_status,is_bind_phone,is_force_renamed,email,renamed_fullname',
+            });
+            if (res.error) {
+                throw new Error('未登录');
+            }
+        } catch (e) {
             throw new Error('未登录');
         }
+
         return {
             uid: res.uid,
             title: res.name,
@@ -27,6 +33,7 @@ export default class ZhiHuAdapter extends BaseAdapter {
     }
 
     async addPost(post) {
+        await this.getMetaData()
         const res = await $.ajax({
             url: 'https://zhuanlan.zhihu.com/api/articles/drafts',
             type: 'POST',

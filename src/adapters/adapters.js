@@ -4,6 +4,7 @@ import CnblogAdapter from './CnblogAdapter';
 import WeiboAdapter from './WeiboAdapter';
 import EmlogAdapter from './EmlogAdapter';
 import WordPressAdapter from './WordPressAdapter';
+import DiscuzAdapter from './DiscuzAdapter';
 
 const adapters = [
     new ZhiHuAdapter(),
@@ -12,6 +13,7 @@ const adapters = [
     new WeiboAdapter(),
     new EmlogAdapter(),
     new WordPressAdapter(),
+    new DiscuzAdapter(),
 ];
 
 export default adapters;

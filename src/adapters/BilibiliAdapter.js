@@ -91,7 +91,6 @@ export default class BilibiliAdapter extends BaseAdapter {
         if (res.data.code != 0) {
             throw new Error('图片上传失败 ' + src)
         }
-        // http only
         console.log('uploadFile', res)
         var id = Math.floor(Math.random() * 100000)
         return [
@@ -155,8 +154,4 @@ export default class BilibiliAdapter extends BaseAdapter {
         img.attr('size', source.size)
     }
 
-    addPromotion(post) {
-        var sharcode = `<blockquote><p>本文使用 <a href="https://github.com/iAJue/Articlesync" class="internal">文章同步助手</a> 同步</p></blockquote>`
-        post.content = post.content.trim() + `${sharcode}`
-    }
 }

@@ -29,7 +29,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    // 接收文章提取完成的消息
     if (message.action === "articleExtracted") {
         chrome.storage.local.set({ article: message.data }, () => {
             chrome.windows.getCurrent((currentWindow) => {
@@ -37,13 +36,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 const height = Math.round(currentWindow.height * 0.8);
                 const left = Math.round((currentWindow.width - width) / 2 + currentWindow.left);
                 const top = Math.round((currentWindow.height - height) / 2 + currentWindow.top);
-                chrome.windows.create({
-                    url: "sync/sync.html",
-                    type: "popup",
-                    width: width,
-                    height: height,
-                    left: left,
-                    top: top
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                    var currentTab = tabs[0];
+                    chrome.windows.create({
+                        url: "sync/sync.html?currentUrl=" + encodeURIComponent(currentTab.url),
+                        type: "popup",
+                        width: width,
+                        height: height,
+                        left: left,
+                        top: top
+                    });
                 });
             });
         });
@@ -78,7 +80,7 @@ chrome.declarativeNetRequest.updateDynamicRules({
                 ]
             },
             "condition": {
-                "urlFilter": "https://api.bilibili.com/*",
+                "urlFilter": "https://api.bilibili.com/x/article/creative/*",
                 "resourceTypes": ["xmlhttprequest"]
             }
         }

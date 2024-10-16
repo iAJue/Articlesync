@@ -7,6 +7,9 @@ export default class CnblogAdapter extends BaseAdapter {
         this.version = '1.0';
         this.type = 'cnblog';
         this.name = '博客园';
+        chrome.storage.local.get(['syncType'],  (result)=> {
+            this.postType = result.syncType || 1;
+        });
     }
 
     async getMetaData() {
@@ -24,7 +27,7 @@ export default class CnblogAdapter extends BaseAdapter {
         return {
             uid: res.displayName,
             title: res.displayName,
-            avatar: res.iconName,
+            avatar: 'https:'+res.iconName,
             type: 'cnblog',
             displayName: '博客园',
             home: 'https://i.cnblogs.com/EditArticles.aspx?IsDraft=1',
@@ -47,7 +50,7 @@ export default class CnblogAdapter extends BaseAdapter {
                 type: 'POST',
                 data: JSON.stringify({
                     "id": post_id,
-                    "postType": 1, //1是随笔,2是文章,3是日志
+                    "postType": this.postType, //1是随笔,2是文章,3是日志
                     "accessPermission": 0,
                     "title": post.post_title,
                     "url": null,

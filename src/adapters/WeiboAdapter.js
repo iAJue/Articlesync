@@ -24,7 +24,7 @@ export default class WeiboAdapter extends BaseAdapter {
                 return {
                     uid: uid,
                     title: nick,
-                    avatar: avatar,
+                    avatar: 'https://image.baidu.com/search/down?url='+avatar,
                     displayName: '微博',
                     type: 'weibo',
                     home: 'https://card.weibo.com/article/v3/editor',

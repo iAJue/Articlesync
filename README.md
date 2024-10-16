@@ -5,6 +5,17 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 基于浏览器插件模式,自动检测本地登录账号,杜绝账号泄露,环境异常等风险
 基于 chrome Manifest v3 浏览器扩展标准开发
 
+
+## 背景
+你也知道,我这又一下子多了好几个博客平台,和一大堆社交网站,如果我想让他们之间都能保持活跃的更新怎么办.(证明我还活着) ~~还能一键盗文章~~
+我最常更新的就是我自己的小破站了,但是其他平台,我可能就只是偶尔更新一下,但是又不想每次都去手动发布,所以我就想,能不能写一个插件,自动检测我本地登录的账号,然后自动发布呢.
+正所谓,自己动手丰衣足食.鼓捣了好几天.勉强算是能用的样子,剩下的就有空在更新了.~~除非你给我钱~~
+插件还有很多不完善的地方,我也没有多平台正式在生产环境中实测,如遇报错,实属正常,那就提交issue吧,或者自己改改,改好了再提交PR吧.嘻嘻~
+
+为了不影响我说话,截图放最后了
+还有,开源不易,来个star吧,嘿嘿嘿~
+~~本来想加一点私货进去的,自动关注我的社区平台~~
+
 ## 功能特色
 - **多平台支持**：支持知乎、Bilibili等各大主流平台,支持自建开源CMS系统。
 - **状态跟踪**：在插件界面中查看文章的同步状态.
@@ -13,14 +24,16 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 - **安全可靠**：插件基于浏览器扩展模式，确保账号安全，避免账号泄露等风险。
 
 ## Todo List
-- [ ] 独立markdown编辑器
+- [ ] 独立文章编辑器
 - [ ] 图片一键同步
-- [ ] markdown与HTML互转
+- [x] markdown与HTML互转
 - [ ] 第三方图床系统
 - [ ] 多账号管理
 - [ ] 多系统客户端版本
 - [ ] 一键ai总结
 - [ ] 视频同步
+- [ ] 标签,分类的支持
+- [ ] 更加友好的错误处理
 - [ ] 更多平台的接入
 
 ## 支持渠道
@@ -31,13 +44,14 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 | 博客园           | 博客 | 已支持 | https://cnblogs.com/            | HTML          | 2024/10/14 |
 | 新浪头条           | 主流自媒体 | 已支持 | https://weibo.com/            | HTML          | 2024/10/14 |
 | emlog           | 开源CMS | 已支持 | https://www.emlog.net/            | HTML          | 2024/10/14 |
-| WordPress           | 开源CMS | 已支持 | https://cn.wordpress.org/            | HTML          | 2024/10/14 |
+| WordPress           | 开源CMS | 已支持 | https://cn.wordpress.org/            | HTML,Markdown          | 2024/10/14 |
+| Discuz           | 开源CMS | 已支持 | https://www.discuz.vip/            | Markdown,Text           | 2024/10/15 |
 
 ## 安装说明
 
 1. 克隆仓库到本地：
    ```bash
-   git clone https://github.com/yourusername/articlesync.git
+   git clone https://github.com/iAJue/Articlesync.git
    ```
 
 2. 进入项目目录：
@@ -153,3 +167,10 @@ ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布�
 Copyright (c) 2024-present, iAJue
 
 本项目遵循 [GPL-3.0](https://opensource.org/licenses/GPL-3.0) 许可证。
+
+## 截图
+![ArticleSync](./images/QQ20241016-162808.png)
+![ArticleSync](./images/QQ20241016-162303.png)
+![ArticleSync](./images/QQ20241016-162333.png)
+![ArticleSync](./images/QQ20241016-162937.png)
+![ArticleSync](./images/QQ20241016-163214.png)

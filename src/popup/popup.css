@@ -14,7 +14,7 @@ body {
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  overflow-y:auto;
+  overflow-y: auto;
   padding-bottom: 66.9px;
   background-color: #FFF;
 }
@@ -37,7 +37,7 @@ body {
 
 .tab.active {
   background-color: #ffffff;
-  border-bottom: 2px solid #4CAF50;
+  border-bottom: 2px solid #4899f8;
   color: #333;
 }
 
@@ -49,36 +49,31 @@ body {
 }
 
 .hidden {
-  display: none!important;
+  display: none !important;
 }
 
 .content-section h3 {
   font-size: 1.5em;
   margin-bottom: 20px;
-  color: #4CAF50;
+  color: #4899f8;
 }
 
-.task-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.task-item span{
+
+.task-item span {
   font-size: 14px;
 }
 
 .task-status {
   padding: 0px 8px;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
 }
 
 .success {
-  background-color: #4CAF50;
+  background-color: #4899f8;
   color: white;
 }
 
@@ -95,26 +90,27 @@ body {
 .bottom-buttons {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
   background-color: #ffffff;
-  border-top: 2px solid #d1d1d1;
+  border-top: 1px solid #d1d1d1;
   position: absolute;
-  bottom: 0;
-  width: 92.9%;
+  bottom: 5px;
+  width: 100%;
+  padding-top: 6px;
 }
 
 .btn {
-  padding: 10px 20px;
-  background-color: #4CAF50;
+  padding: 11px 16px;
+  background-color: #4899f8;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 6px;
 }
 
 .btn:hover {
-  background-color: #45a049;
+  background-color: #357bb5;
 }
 
 #add-account-section {
@@ -150,12 +146,12 @@ body {
 }
 
 .account-option:hover {
-  border-color: #4CAF50;
+  border-color: #4899f8;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .account-option.selected {
-  border-color: #4CAF50;
+  border-color: #4899f8;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -172,7 +168,7 @@ body {
 
 #back-to-tabs-btn {
   padding: 4px 20px;
-  background-color: #4CAF50;
+  background-color: #4899f8;
   border: none;
   border-radius: 5px;
   color: white;
@@ -181,21 +177,30 @@ body {
 }
 
 #back-to-tabs-btn:hover {
-  background-color: #45a049;
+  background-color: #357bb5;
 }
 
 #account-list {
   border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 #account-list .task-item {
   display: flex;
-  justify-content: space-between;
   padding: 10px;
-  margin-bottom: 10px;
   background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 90px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 #account-list p {
@@ -204,8 +209,7 @@ body {
   margin: 0;
 }
 
-
-input[type="text"]{
+input[type="text"] {
   width: 67%;
   padding: 8px 20px;
   margin: 6px 0;
@@ -218,42 +222,65 @@ input[type="text"]{
   transition: all 0.3s ease;
 }
 
-
-input[type="text"]:focus{
-  border-color: #007BFF;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+input[type="text"]:focus {
+  border-color: #4899f8;
+  box-shadow: 0 0 10px rgba(72, 153, 248, 0.5);
   outline: none;
   background-color: #fff;
 }
 
-
-input[type="text"]::placeholder{
+input[type="text"]::placeholder {
   color: #aaa;
   font-style: italic;
 }
 
-
-input[type="text"]:not(:placeholder-shown){
+input[type="text"]:not(:placeholder-shown) {
   border-color: #28a745;
 }
 
-.account-url-input{
+.account-url-input {
   display: flex;
   flex-direction: column;
   margin-top: 6px;
 }
 
-#save-account-btn{
+#save-account-btn {
   position: absolute;
   right: 30px;
   margin-top: -38px;
   height: 78px;
+  background-color: #4899f8;
 }
 
-.delete-btn{
+#save-account-btn:hover {
+  background-color: #357bb5;
+}
+
+.delete-btn {
   background: #ffc400;
   color: #FFF;
   border: 0px solid;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #ffb800;
+}
+
+
+.task-items {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 15px;
+}
+
+.task-title{
+  width: 300px; 
 }

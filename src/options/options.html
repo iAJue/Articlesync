@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插件设置</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="config">插件配置</button>
+            <button class="tab-button" data-tab="about">关于插件</button>
+        </div>
+        <div class="tab-content active" id="config">
+            <form id="settingsForm">
+                <div class="form-group horizontal">
+                    <label for="forum-id">Discuz论坛文章同步平台</label>
+                    <select id="platform-select" name="platform-select">
+                        <option value="">请选择平台</option>
+                    </select>
+                </div>
+                <div class="form-group horizontal">
+                    <label for="forum-id">Discuz论坛同步板块ID:</label>
+                    <input type="text" id="forum-id" name="forum-id" placeholder="请输入板块ID">
+                </div>
+                <div class="form-group horizontal">
+                    <label for="category-id">Discuz论坛同步分类ID:</label>
+                    <input type="text" id="category-id" name="category-id" placeholder="请输入分类ID">
+                </div>
+                <div class="form-group horizontal">
+                    <label for="sync-type">博客园同步文章类型:</label>
+                    <select id="sync-type" name="sync-type">
+                        <option value="1">随笔</option>
+                        <option value="2">文章</option>
+                        <option value="3">日志</option>
+                    </select>
+                </div>
+                <div class="form-group horizontal">
+                    <label for="promote-toggle">添加底部同步声明:</label>
+                    <input type="checkbox" id="promote-toggle" name="promote-toggle" checked>
+                </div>
+                <button type="button" class="save-button" id="save-settings">保存设置</button>
+            </form>
+        </div>
+
+        <div class="tab-content" id="about">
+            <h3>ArticleSync 是一个浏览器扩展，帮助用户轻松将文章同步发布到多个社交平台。它提供了一站式解决方案，让你在不同的社交媒体平台上同步文章变得简单高效。</h3>
+            <br><h5>插件版本：1.0.0</h5>
+            <h5>版权信息：© 2024 <a href="https://MoeJue.cn" target="_blank">阿珏酱</a></h5>
+            <h5>GitHub：<a href="https://github.com/iAJue/Articlesync" target="_blank">https://github.com/iAJue/Articlesync</a></h5>
+            <img src="../images/Feeding.gif" style="width: 100%;">
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

@@ -50,7 +50,7 @@ export default class CnblogAdapter extends BaseAdapter {
                 type: 'POST',
                 data: JSON.stringify({
                     "id": post_id,
-                    "postType": this.postType, //1是随笔,2是文章,3是日志
+                    "postType": parseInt(this.postType), //1是随笔,2是文章,3是日志
                     "accessPermission": 0,
                     "title": post.post_title,
                     "url": null,
@@ -61,7 +61,7 @@ export default class CnblogAdapter extends BaseAdapter {
                     "siteCategoryId": null,
                     "blogTeamIds": null,
                     "isPublished": true,
-                    "displayOnHomePage": false,
+                    "displayOnHomePage": true, //是否在首页显示
                     "isAllowComments": true,
                     "includeInMainSyndication": true,
                     "isPinned": false,
@@ -103,8 +103,7 @@ export default class CnblogAdapter extends BaseAdapter {
     async editPost(post, post_id) {
         this.addPost(post, post_id);
         return {
-            status: 'success',
-            post_id: post_id
+            status: 'success'
         }
     }
 
